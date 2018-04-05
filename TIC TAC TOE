@@ -1,0 +1,56 @@
+#include <iostream>
+
+static void board(std::string[], int, int);
+void loadInArr(std::string[], const int);
+
+int main() {
+    const int SIZE = 11;
+    std::string u[SIZE] = {""};
+    int user = 10;
+
+    loadInArr(u, SIZE);
+    board(u, user, 0);
+
+    for(int i = 0; i < 9; i++) {
+        if(i % 2 == 0) {
+            std::cout << "Player 1's Turn" << std::endl;
+            std::cin >> user;
+            board(u, user, 0);
+        } else {
+            std::cout << "Player 2's Turn" << std::endl;
+            std::cin >> user;
+            board(u, user, 1);
+        }
+    }
+    return 0;
+}
+
+void loadInArr(std::string arr[], const int S) {
+    for (int i = 0; i < S; i++) {
+        if (i < 9) {
+            arr[i] = "   ";
+        } else if (i == 9) {
+            arr[i] = " O ";
+        } else {
+            arr[i] = " X ";
+        }
+    }
+}
+
+static void board(std::string u[], int user, int i) {
+    std::string x = "|";
+    std::string y = "---";
+    std::string z = "|---";
+    user--;
+
+    if (i == 0) {
+        u[user] = u[9];
+    } else {
+        u[user] = u[10];
+    }
+    std::cout << u[0] << x << u[1] << x << u[2] << "     1 " << x << " 2 " << x << " 3 " <<  "\n"
+              << y << z << z << "    " << y << z << z <<  "\n"
+              << u[3] << x << u[4] << x << u[5] << "     4 " << x << " 5 " << x << " 6 "  << "\n"
+              << y << z << z << "    " << y << z << z <<  "\n"
+              << u[6] << x << u[7] << x << u[8] << "     7 " << x << " 8 " << x << " 9 "  << "\n" << std::endl;
+}
