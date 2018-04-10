@@ -1,0 +1,69 @@
+#include <iostream>
+
+unsigned int iB = 0;
+unsigned int jB = 0;
+const int height = 5;
+const int width = 10;
+
+void makeGrid(char[][width], char, const int, const int);
+
+int main() {
+    char grid[height][width] = {0};
+
+    while(true) {
+        char move = ' ';
+
+        std::cout << "Up, down, left, or right?" << std::endl;
+        std::cin >> move;
+
+        if(move == 'q') {
+            break;
+        }
+
+        makeGrid(grid, move, height, width);
+    }
+
+    return 0;
+}
+
+void makeGrid(char arr[][width], char dir, const int h, const int w) {
+    if(dir == 'w') {
+        if(iB > 0) {
+            iB--;
+        }
+    } else if (dir == 'a') {
+        if(jB > 0) {
+            jB--;
+        }
+    } else if (dir == 's') {
+        if(iB < h -1) {
+            iB++;
+        }
+    } else if (dir == 'd') {
+        if(jB < w - 1) {
+            jB++;
+        }
+    }
+    for(int i = 0; i < h; i++) {
+        for(int j = 0; j < w; j++) {
+                arr[i][j] = {32};
+        }
+    }
+
+    arr[iB][jB] = {111};
+
+    for(int i = 0; i < h; i++) {
+        for(int j = 0; j < w; j++) {
+            if(i < h && j == 0) {
+                std::cout << "|";
+            }
+
+            std::cout << arr[i][j] << " ";
+
+            if(i < h && j == w - 1) {
+                std::cout << "\b|";
+            }
+        }
+        std::cout << std::endl;
+    }
+}
