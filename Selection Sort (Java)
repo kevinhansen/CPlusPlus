@@ -1,0 +1,36 @@
+public class Main {
+    public static void main(String[] args) {
+        int arr[] = {7, 6, 4, 8, 3, 4, 10, 1, 10, 10};
+        
+        selectSort(arr);
+    }
+    private static int findMax(int arr[], int count) {
+        int size = arr.length-count;
+        int currentLargest = arr[0];
+        int index = 0;
+        for (int i = 0; i < size; i++) {
+            if (arr[i] > currentLargest) {
+                currentLargest = arr[i];
+                index = i;
+            }
+        }
+        return index;
+    }
+    private static void selectSort(int arr[]) {
+        int size = arr.length-1;
+        int count = 0;
+        for(int i = 0; i < size; i++) {
+            int maxNumIndex = findMax(arr, count);
+            int lastIndex = size - i;
+            int temp = arr[lastIndex];
+
+            arr[lastIndex] = arr[maxNumIndex];
+            arr[maxNumIndex] = temp;
+
+            count++;
+        }
+        for(int j = 0; j <= size; j++) {
+            System.out.print(arr[j] + " ");
+        }
+    }
+}
